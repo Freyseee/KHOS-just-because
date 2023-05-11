@@ -1,0 +1,31 @@
+
+
+
+
+from bmp180 import BMP180  #Gemmer vi det her p氓 harddisk
+
+from machine import SoftI2C, Pin
+from display import disp_setup
+# create an I2C bus object accordingly to the port you are using
+#bus  = I2C(1, scl=Pin(22), sda=Pin(21), freq=400000)
+# bus =  I2C(scl=Pin(4), sda=Pin(5), freq=100000)   # on esp8266
+
+
+def bmp_setup():
+  oled = disp_setup()
+  bus =  SoftI2C(scl=Pin(22), sda=Pin(21), freq=100000)
+  bmp180 = BMP180(bus) #
+  bmp180.oversample_sett = 2
+  bmp180.baseline = 102125
+  print("dmp setup complete")
+  oled.text('bmp180 setup', 0, 0)
+  oled.show()
+  return bmp180
+  
+
+
+
+
+
+
+

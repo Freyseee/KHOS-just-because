@@ -1,0 +1,8 @@
+In Shell write: npm start
+
+If it doesn't work try writing: npm install
+and then: npm install node-fetch
+and then: npm start
+
+Now the webview should show the front page. Click "open in new tab" to proceed.
+Lastly, click "ÅBEN DATABASE" to open the database. 

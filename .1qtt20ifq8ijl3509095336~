@@ -1,0 +1,377 @@
+
+
+
+
+
+# How to make some sound with MicroPython
+# Example 2: Make a mario sound
+# Author: George Bantique,
+#         TechToTinker Youtube channel
+#		  techtotinker.blogspot.com
+# Date: September 18, 2020
+
+import machine
+import time
+
+p22 = machine.Pin(25, machine.Pin.OUT)
+
+# These are the notes with equivalent frequency
+# https://www.blackghostaudio.com/blog/basic-music-theory-for-beginners
+
+
+C0 = 16
+CU0 = 17
+DJ0 = CU0
+D0 = 18
+DU0 = 19
+EJ0 = DU0
+E0 = 21
+F0 = 22
+FU0 = 23
+GJ0 = FU0
+G0 = 25
+GU0 = 26
+AJ0 = GU0
+A0 = 28
+AU0 = 29
+BJ0 = AU0
+B0 = 31
+#Ny Oktav
+C0 = 16
+C1 = 33
+CU1 = 35
+DJ1 = CU1
+D1 = 37
+DU1 = 39
+EJ1 = DU1
+
+E1 = 41
+F1 = 44
+FU1 = 46
+GJ1 = FU1
+G1 = 49
+GU1 = 52
+AJ1 = GU1
+A1 = 55
+AU1 = 58
+BJ1 = AU1
+B1 = 62
+#Ny Oktav
+C2 = 65
+
+CU2 = 69
+DJ2 = CU2
+D2 = 73
+DU2 = 78
+EJ2 = DU2
+E2 = 82
+F2 = 87
+FU2 = 93
+GJ2 = FU2
+G2 = 98
+GU2 = 104
+AJ2 = GU2
+A2 = 110
+AU2 = 117
+BJ2 = AU2
+B2 = 123
+#Ny Oktav
+C3= 131
+CU3=139
+DJ3= CU1
+D3= 147
+DU3= 156
+EJ3= DU1
+E3= 165
+F3= 175
+FU3= 185
+GJ3= FU1
+G3= 196
+GU3= 207
+AJ3= GU1
+A3= 220
+AU3= 233
+BJ3=AU1
+B3= 247
+#Ny Oktav
+C4= 262
+CU4= 277
+DJ4= CU4
+D4= 294
+
+DU4= 311
+EJ4= DU4
+E4= 330
+F4= 349
+FU4= 370
+GJ4= FU4
+G4= 392
+GU4= 415
+AJ4= GU4
+A4= 440
+AU4= 466
+BJ4= AU4
+B4= 494
+#Ny Oktav
+C5= 523
+CU5= 554
+DJ5= CU5
+D5= 587
+DU5= 622
+EJ5= DU5
+E5= 659
+F5= 698
+FU5= 740
+GJ5= FU5
+G5= 784
+GU5= 831
+AJ5= GU5
+A5= 880
+AU5= 932
+BJ5= AU5
+B5= 988
+#Ny Oktav
+C6= 1047
+CU6= 1109
+DJ6= CU6
+D6= 1175
+DU6= 1245
+EJ6= DU6
+E6= 1319
+F6= 1397
+FU6= 1480
+GJ6= FU6
+G6= 1568
+GU6= 1661
+AJ6= GU6
+A6= 1760
+AU6= 1865
+BJ6= AU6
+B6= 1976
+#Ny Oktav
+C7= 2093
+CU7= 2217
+DJ7= CU7
+D7= 2349
+DU7 = 2489
+EJ7= DU7
+E7= 2637
+F7= 2794
+FU7= 2960
+GJ7= FU7
+G7= 3136
+GU7= 3322
+AJ7= GU7
+A7= 3520
+AU7= 3729
+BJ7= AU7
+B7= 3951
+#Ny Oktav
+C8= 4186
+CU8= 4435
+DJ8= CU8
+D8= 4699
+DU8= 4978
+EJ8= DU8
+E8= 5274
+F8= 5588
+FU8= 5920
+GJ8= FU8
+G8= 6272
+GU8= 6645
+AJ8= GU8
+A8= 7040
+AU8= 7459
+BJ8= AU8
+B8= 7902
+n = 8000
+'''
+n = 8000
+B0  = 31
+C1  = 33
+CS1 = 35
+D1  = 37
+DS1 = 39
+E1  = 41
+F1  = 44
+FS1 = 46
+G1  = 49
+GS1 = 52
+A1  = 55
+AS1 = 58
+B1  = 62
+C2  = 65
+CS2 = 69
+D2  = 73
+DS2 = 78
+E2  = 82
+F2  = 87
+FS2 = 93
+G2  = 98
+GS2 = 104
+A2  = 110
+AS2 = 117
+B2  = 123
+C3  = 131
+CS3 = 139
+D3  = 147
+DS3 = 156
+E3  = 165
+F3  = 175
+FS3 = 185
+G3  = 196
+GS3 = 208
+A3  = 220
+AS3 = 233
+B3  = 247
+C4  = 262
+CS4 = 277
+D4  = 294
+DS4 = 311
+E4  = 330
+F4  = 349
+FS4 = 370
+G4  = 392
+GS4 = 415
+A4  = 440
+
+AS4 = 466
+B4  = 494
+C5  = 523
+CS5 = 554
+D5  = 587
+DS5 = 622
+E5  = 659
+F5  = 698
+FS5 = 740
+G5  = 784
+GS5 = 831
+A5  = 880
+AS5 = 932
+B5  = 988
+C6  = 1047
+CS6 = 1109
+D6  = 1175
+DS6 = 1245
+E6  = 1319
+F6  = 1397
+FS6 = 1480
+G6  = 1568
+GS6 = 1661
+A6  = 1760
+AS6 = 1865
+B6  = 1976
+C7  = 2093
+CS7 = 2217
+D7  = 2349
+DS7 = 2489
+E7  = 2637
+F7  = 2794
+FS7 = 2960
+G7  = 3136
+GS7 = 3322
+A7  = 3520
+AS7 = 3729
+B7  = 3951
+C8  = 4186
+CS8 = 4435
+D8  = 4699
+DS8 = 4978
+'''
+# Function play is use to play sound from a list of notes
+def play(pin, melodies, delays, duty):
+	# Create the pwm object
+    pwm = machine.PWM(pin)
+    # Loop through the whole list
+    for note in melodies:
+        pwm.duty(duty)
+        pwm.freq(note)
+        time.sleep(delays)
+    # Disable the pulse, setting the duty to 0
+    pwm.duty(0)
+    # Disconnect the pwm driver
+    pwm.deinit()
+
+# This is the list of notes for mario theme
+# 0 denotes rest notes
+
+mario = [
+     E7, E7,  n, E7,  n, C7, E7,  n,
+     G7,  n,  n,  n, G6,  n,  n,  n,
+     C7,  n,  n, G6,  n,  n, E6,  n,
+      n, A6,  n, B6,  n,AU6, A6,  n,
+     G6, E7,  n, G7, A7,  n, F7, G7,
+      n, E7,  n, C7, D7, B6,  n,  n,
+     C7,  n,  n, G6,  n,  n, E6,  n,
+      n, A6,  n, B6,  n,AU6, A6,  n,
+     G6, E7,  n, G7, A7,  n, F7, G7,
+      n, E7,  n, C7, D7, B6,  n,  n,
+]
+
+keyCat=[
+E3, E3, E3, G3,G3, G3, G3, G3,
+A4, n, A4, A4, G3, G3, G3, G3,
+E3, E3, E3, A4, A4, A4, G3, G3,
+C3, C3, C3, D3, D3, n, n, n,
+n, n, n, A4,A4, A4, A4, G4, G4,
+E3, E3, E3, E3, n, n, n, n,
+n, n, D3, n, D3, D3, C3, C3,
+E3, E3, E3, E3, n, n, n, n,
+n, n, n, A4, A4, A4, G3, G3, E3,
+E3, n, E3, D3, E3, E3, G3,
+G3, G3, D3, n, n, n, n,
+n, n, n, n, E3, E3, F3, F3, E3, E3,
+F3,E3, E3, E3, E3, E3, E3, E3
+
+] 
+finalCount=[	
+    C4, C4, G4, G4, A4, A4, G4,
+		F4, F4, E4, E4, D4, D4, C4,
+		
+		G4, G4, F4, F4, E4, E4, D4,
+		G4, G4, F4, F4, E4, E4, D4,
+		
+		C4, C4, G4, G4, A4, A4, G4,
+		F4, F4, E4, E4, D4, D4, C4,
+
+
+]
+ricky =[
+D3, E3, G3, E3, B4, B4, B4, A4,
+D3, E3, G3, E3, A4, A4, A4, G3, F3, E3,
+D3, E3, G3, E3, G3, G3, G3, A3, F3, E3, D3,
+D3, n, D3, A4, A4, A4, G4, G4, G4,
+D3, E3, G3, E3, F4, F4, F4, A3, A3,
+D3, E3, G3, E3, D4, D4, F3, G3, F3, D3,
+D3, E3, G3, E3, G3, G3, A4, F3, E3, D3, 
+D3, A4, A4, G4, G4, G4, G4, n, n, n, n
+]
+Lyd =[
+E5,C5
+]
+def play_ricky():
+  play(p22,ricky, 0.3, 10)
+
+def play_finalCount():
+  play(p22, finalCount,0.5,10)
+
+
+# Function to easily play the mario theme
+def play_mario():
+	# Play the mario theme to GPIO 23
+    # with 150ms note interval
+    # with a low volume
+    play(p22, mario, 0.15, 400)
+
+   
+def play_keyCat():
+  play(p22,keyCat,0.30,10)
+    
+def play_lyd():
+  play(p22,Lyd, 0.30,40)
+
+
+
+
+
+

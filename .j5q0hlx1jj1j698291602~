@@ -1,0 +1,73 @@
+
+
+from aflaesBMP180 import bmp_setup
+from time import sleep
+from wifi import connect_wifi
+from urequests import get # type: ignore
+from display import disp_setup
+from Buzzer import play_mario, play_lyd
+
+
+print("Main file running")
+
+
+oled = disp_setup()
+
+connect_wifi("8T","12346789")
+
+bmp180 = bmp_setup()
+temp = str(bmp180.temperature)
+p = bmp180.pressure
+altitude = bmp180.altitude
+print(temp, p, altitude)
+temp = str(temp)
+p = str(p)
+
+
+# Send data to url and print response
+while True:
+    temp = str(bmp180.temperature)
+    p = bmp180.pressure
+    altitude = bmp180.altitude
+    print(temp, p, altitude)
+    temp = str(temp)
+    p = str(p)
+      
+    url = 'https://projekt-1-cansat.freyseee.repl.co/data/upload?temp='+temp+'&tryk='+p 
+    #url = "https://example.com"
+    #url = 'https://projekt-1-cansat.freyseee.repl.co/data/upload?temp=27&tryk=2'
+    print("yayi")
+      
+    try:
+        oled.fill(0)
+        res = get(url)
+        print(res.text)
+        oled.text(res.text, 0, 30)
+        oled.show()
+        play_lyd()
+        print("cool")
+    except:
+        print("Couldn't connect to url: {url}")
+        oled.fill(0)
+        oled.text('no url', 0, 40)
+        oled.show()
+        play_mario()
+        print("noo")
+    sleep(0.1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

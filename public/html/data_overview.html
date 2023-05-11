@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Database</title>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Simple data example</title>
+
+    <script src="../js/functions.js" defer></script>
+    <script src="../js/get_data.js" defer></script>
+    <script src="../js/prompt.js" defer></script>
+    <script src="../js/websocket.js" defer></script>
+</head>
+
+<body>
+
+
+    <!-- source: https://codepen.io/florantara/pen/dROvdb -->
+    <h3>Varer i kølerum</h3>
+  <div id="topButtons">    <button id="refresh" onClick="refresh();">Refresh</button>
+    <button id="deleter" onClick="showPopup();">Fjern vare</button></div>
+
+    <div class="table-wrapper">
+        <table class="fl-table" id="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Vare</th>
+                    <th> Nummer </th>
+                    <th>Holdbarhed</th>
+                    <th>Antal</th>
+                    <th>Lokation</th>
+                    <th>Vægt</th>
+                </tr>
+            </thead>
+            <tbody id="cells">
+
+            <tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
+<!-- Popup vindue til tilføjelse af varer i database -->
+<div class="modal-overlay" id="uploader">
+    <div id="modal">
+        <div class="modal-header">
+            <h5>Indtast antal af varer og lokation</h2>
+        </div>
+
+        <div id="textWrap" class="modal-content">
+
+            <input type="text" id="inputAntal" placeholder="Antal (fx 37)" required size="40%">
+            <input type="text" id="inputLokation" placeholder="Lokation (fx A6)" required size="40%">
+        </div>
+
+        <div class="modal-footer">
+            <button onClick="cancel()" id="popupButton" id="Cancel">Cancel</button>
+            <button onClick="continueUpload()" id="popupButton" id="Ok">Ok</button>
+        </div>
+    </div>
+</div>
+
+<!-- Popup vindue til at fjerne varer fra database -->
+<div class="modal-overlay" id="remover">
+    <div id="modal">
+        <div class="modal-header">
+            <h5>Skriv ID på varen du vil slette</h2>
+        </div>
+
+        <div id="textWrap" class="modal-content">
+
+            <input type="text" id="inputID" placeholder="ID (fx 4)" required size="80%">
+        </div>
+
+        <div class="modal-footer">
+            <button onClick="cancel()" id="popupButton" id="Cancel">Cancel</button>
+            <button onClick="removeDataset()" id="popupButton">Ok</button>
+        </div>
+    </div>
+</div>
